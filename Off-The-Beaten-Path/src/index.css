@@ -1,0 +1,85 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+ 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "leaflet/dist/leaflet.css";
+
+.image {
+  @apply bg-cover bg-no-repeat bg-[url("https://cdn.pixabay.com/photo/2017/03/27/04/37/sunset-2177324_960_720.jpg")];
+}
+.title{
+  @apply font-title text-4xl justify-center h-10 bg-lightSand
+}
+.signIn {
+  @apply inline-block items-center bg-slate-200 bg-opacity-60 shadow-lg rounded-lg
+}
+.signIn_h2 {
+ @apply text-3xl text-center m-4 border-b-2 border-gray-700
+}
+.form-control {
+  @apply rounded mb-4 border border-gray-700
+}
+.bg {
+  @apply bg-paleDogwood bg-cover p-8 rounded-lg shadow-2xl
+}
+.btn-lightSand{
+ @apply bg-carolinaBlue text-black;
+  }
+.btn-color {
+  @apply bg-blue text-black
+}
+.btn-color2 {
+  @apply bg-caribbeanCurrent text-white rounded-full h-12 w-40
+}
+.btn-justColor {
+  @apply bg-caribbeanCurrent text-white rounded-full
+}
+.btn {
+    text-transform: none; 
+  }
+.chat-bubble-color {
+  @apply bg-blue
+}
+  .leaflet-container {
+
+    width: 65vw;
+
+    height: 77vh;
+
+    margin-left: 3%;
+
+    border-radius: 10px;
+
+}
+.clear {
+  @apply bg-cover bg-[url("https://wallpapercave.com/uwp/uwp1967772.gif")]
+}
+.clouds {
+  @apply bg-cover bg-[url("https://media.tenor.com/2eVevYiek64AAAAM/scary-weather.gif")]
+}
+.rain {
+  @apply bg-cover bg-[url("https://media.tenor.com/D8N2aMZtd4YAAAAC/rain.gif")]
+}
+.fog {
+  @apply bg-cover bg-[url("https://media.tenor.com/5ImWLS5QAJgAAAAC/foggy-fog.gif")]
+}
+.snow {
+  @apply bg-cover bg-[url("https://media.tenor.com/l2yp4uABNAQAAAAM/snow-falling.gif")]
+}
+.thunderstorms {
+  @apply bg-cover bg-[url("https://i.pinimg.com/originals/95/50/61/9550611aa1fd2611b1d6f286a4e812bf.gif")]
+}
+.bgImage {
+  @apply bg-cover bg-[url("https://www.xtrafondos.com/wallpapers/vertical/niebla-sobre-las-montanas-al-amanecer-9526.jpg")]
+}
+.mist {
+  @apply bg-cover bg-[url("https://thumbs.gfycat.com/DeliciousUnfortunateCockroach-size_restricted.gif")]
+}
+
+/*
+https://cdn.pixabay.com/photo/2014/09/10/00/59/mountains-440520_960_720.jpg
+*/
