@@ -2,14 +2,14 @@ import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getUserProfile } from "../auth/LoginProvider"
 
-export const NavBar = () => {
+export const NavBar = ({token, setToken, userId}) => {
     const navigate = useNavigate()
-    const localHiker = localStorage.getItem("hike_user")
-    const hikeUser = JSON.parse(localHiker)
+    //const localUser = localStorage.getItem('userId')
     const [userProfile, updateUserProfile] = useState({})
+  
     useEffect(
         () => {
-            getUserProfile(hikeUser).then(
+            getUserProfile(userId).then(
                 (userData) => {
                     const singleUser = userData[0]
                     updateUserProfile(singleUser)
@@ -67,8 +67,9 @@ export const NavBar = () => {
         </li>
         <li>
             <Link className="navbar__link" to="" onClick={() => {
-                 localStorage.removeItem("hike_user")
-                navigate("/", {replace: true})
+                    setToken("");
+                    navigate("/login");
+                  
          }}>Logout</Link>
      </li>
       </ul>

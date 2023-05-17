@@ -13,7 +13,7 @@ export const AddNewReview = (newReview) => {
             .then(res => res.json())
 }
 export const getReviewsByUser = (hikeUser) => {
-    return fetch(`http://localhost:8088/reviews?_expand=user&userId=${hikeUser.id}`)
+    return fetch(`http://localhost:8088/reviews?_expand=user&user=${hikeUser.id}`)
     .then(res => res.json())
 }
 export const EditUserProfile = (userProfile) => {
@@ -41,7 +41,7 @@ export const getUserProfiles = () => {
     .then(res => res.json())
 }
 export const getReviewsByUserId = (id) => {
-    return fetch(`http://localhost:8088/reviews?_expand=user&userId=${id}`)
+    return fetch(`http://localhost:8088/reviews?_expand=user&user=${id}`)
     .then(res => res.json())
 }
 export const DeletePost = review => {
