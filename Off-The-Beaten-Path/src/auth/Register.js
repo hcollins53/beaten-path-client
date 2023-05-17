@@ -1,69 +1,83 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { findEmail } from "./LoginProvider"
-import { getRegister } from "./LoginProvider"
+import { useState, useRef } from "react"
+import { useNavigate, Link } from "react-router-dom"
+import { registerUser } from "./LoginProvider"
 
 
-export const Register = (props) => {
-    const [user, setUser] = useState({
-        email: "",
-        fullName: "",
-    })
-    let navigate = useNavigate()
+export const Register = ({setToken}) => {
+    const firstName = useRef()
+    const lastName = useRef()
+    const username = useRef()
+    const bio = useRef()
+    const password = useRef()
+    const verifyPassword = useRef()
+    const passwordDialog = useRef()
+    const navigate = useNavigate()
 
-    const registerNewUser = () => {
-        getRegister(user)
-            .then(createdUser => {
-                if (createdUser.hasOwnProperty("id")) {
-                    localStorage.setItem("hike_user", JSON.stringify({
-                        id: createdUser.id,
-                    }))
-
-                    navigate("/trails")
-                }
-            })
-    }
+    
+       
 
     const handleRegister = (e) => {
         e.preventDefault()
-        findEmail(user.email)
-            .then(response => {
-                if (response.length > 0) {
-                    // Duplicate email. No good.
-                    window.alert("Account with that email address already exists")
-                }
-                else {
-                    // Good email, create user.
-                    registerNewUser()
-                }
-            })
-    }
+        if (password.current.value === verifyPassword.current.value) {
+            const newUser = {
+                "username": username.current.value,
+                "first_name": firstName.current.value,
+                "last_name": lastName.current.value,
+                "bio": bio.current.value,
+                "password": password.current.value
+            }
 
-    const updateUser = (evt) => {
-        const copy = {...user}
-        copy[evt.target.id] = evt.target.value
-        setUser(copy)
+            registerUser(newUser)
+                .then(res => {
+                    if ("token" in res) {
+                        setToken(res.token)
+                        navigate("/")
+                    }
+                })
+        } else {
+            passwordDialog.current.showModal()
+        }
     }
-
     return <>
     <div className="title">Off the Beaten Path</div>
         <main className="mb-4 font-title w-screen h-screen image"style={{ textAlign: "center" }}>
+        <dialog className="dialog dialog--password" ref={passwordDialog}>
+                <div>Passwords do not match</div>
+                <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
+            </dialog>
             <form className="signIn p-4 mt-48" onSubmit={handleRegister}>
                 <h1 className=" text-3xl item-center mb-4 border-b-2 border-gray-700">Please Register</h1>
                 <fieldset  className="form-group" >
                     <label className="" htmlFor="fullName"> Name </label>
-                    <input onChange={updateUser}
-                           type="text" id="fullName" className="mx-auto rounded-lg border-slate-500 border-2 mt-2 w-[200px]" required autoFocus />
+                    <input ref={firstName} type="text" name="firstName" className="mx-auto rounded-lg border-slate-500 border-2 mt-2 w-[200px]" placeholder="First name" required autoFocus /> 
                 </fieldset>
-                <fieldset className="mb-3">
-                    <label className="" htmlFor="email"> Email address </label>
-                    <input onChange={updateUser}
-                        type="email" id="email" className="mx-auto rounded-lg border-slate-500 border-2 mt-2 w-[200px] " required />
+                <fieldset>
+                    <label htmlFor="lastName"> Last Name </label>
+                    <input ref={lastName} type="text" name="lastName" className="mx-auto rounded-lg border-slate-500 border-2 mt-2 w-[200px]" placeholder="Last name" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="inputUsername">Username</label>
+                    <input ref={username} type="text" name="username" className="mx-auto rounded-lg border-slate-500 border-2 mt-2 w-[200px]" placeholder="Username" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="inputPassword"> Password </label>
+                    <input ref={password} type="password" name="password" className="mx-auto rounded-lg border-slate-500 border-2 mt-2 w-[200px]" placeholder="Password" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="verifyPassword"> Verify Password </label>
+                    <input ref={verifyPassword} type="password" name="verifyPassword" className="mx-auto rounded-lg border-slate-500 border-2 mt-2 w-[200px]" placeholder="Verify password" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="verifyPassword"> Verify Password </label>
+                    <textarea ref={bio} name="bio" className="mx-auto rounded-lg border-slate-500 border-2 mt-2 w-[200px]" placeholder="Let other gamers know a little bit about you..." />
                 </fieldset>
                 <fieldset>
                     <button className="btn btn-justColor font-light btn-sm" type="submit"> Register </button>
                 </fieldset>
             </form>
+            <section className="link--register">
+                Already registered? <Link to="/login">Login</Link>
+            </section>
         </main>
         </>
 }
