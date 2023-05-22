@@ -1,9 +1,14 @@
+const localUser = localStorage.getItem("hike_user")
+    const user = JSON.parse(localUser)
+    const hikeUser = user['userId']
+    const token = user["token"]
+
 export const getTrails = () => {
     return fetch(`http://localhost:8000/trails`, { 
         headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
-        "Authorization": `Token ${localStorage.getItem("auth_token")}`
+        "Authorization": `Token ${token}`
       }})
             .then(res => res.json())
 }
@@ -11,17 +16,24 @@ export const AddNewTrail = (newTrail) => {
     return fetch(`http://localhost:8000/trails`, {
          method: "POST",
          headers: {
-             "Content-Type": "application/json"
+             "Content-Type": "application/json",
+             "Accept": "application/json",
+            "Authorization": `Token ${token}`
          },
         body: JSON.stringify(newTrail) 
      })
  }
  export const getTrailById = ({trailId}) => {
-    return fetch(`http://localhost:8000/trails?id=${trailId}`)
+    return fetch(`http://localhost:8000/trails/${trailId}`, {
+        headers: {
+            "Accept": "application/json",
+           "Authorization": `Token ${token}`
+        }
+    })
             .then(res => res.json())
 }
 export const AddNewWishList = (newWish) => {
-    return fetch(`http://localhost:8000/wantList`, {
+    return fetch(`http://localhost:8000/wantlist`, {
          method: "POST",
          headers: {
              "Content-Type": "application/json"
@@ -30,26 +42,37 @@ export const AddNewWishList = (newWish) => {
      })
  }
 
-export const GetUserWishList = (hikeUser) => {
-    return fetch(`http://localhost:8000/wantList?_expand=user&_expand=trail&user=${hikeUser.id}`)
+export const GetUserWishList = () => {
+    return fetch(`http://localhost:8000/wantlists?user=${hikeUser}`, {
+        headers: {
+            "Accept": "application/json",
+           "Authorization": `Token ${token}`
+        }
+    })
             .then(res => res.json())
 }
 export const AddNewCompletedToList = (newCompleted) => {
-    return fetch(`http://localhost:8000/completedList`, {
+    return fetch(`http://localhost:8000/completedlists`, {
          method: "POST",
          headers: {
-             "Content-Type": "application/json"
+             "Content-Type": "application/json",
+             "Authorization": `Token ${token}`
          },
         body: JSON.stringify(newCompleted) 
      })
  }
  export const DeleteWish = wish => {
-    return fetch(`http://localhost:8000/wantList/${wish.id}`, {
+    return fetch(`http://localhost:8000/wantlist/${wish.id}`, {
         method: "DELETE"
     })
 }
-export const getUserCompletedList = (hikeUser) => {
-    return fetch(`http://localhost:8000/completedList?_expand=user&_expand=trail&user=${hikeUser.id}`)
+export const getUserCompletedList = () => {
+    return fetch(`http://localhost:8000/completedlists?user=${hikeUser}`, {
+        headers: {
+            "Accept": "application/json",
+           "Authorization": `Token ${token}`
+        }
+    })
             .then(res => res.json())
 }
 export const getWeather = (trail) => {
@@ -61,11 +84,11 @@ export const WeatherIcon = (icon) => {
     return (`http://openweathermap.org/img/wn/${icon}.png`)
 }
 export const GetUserWishListById = (id) => {
-    return fetch(`http://localhost:8088/wantList?_expand=user&_expand=trail&user=${id}`)
+    return fetch(`http://localhost:8088/wantlist?user=${id}`)
             .then(res => res.json())
 }
 export const getUserCompletedListById = (id) => {
-    return fetch(`http://localhost:8088/completedList?_expand=user&_expand=trail&user=${id}`)
+    return fetch(`http://localhost:8088/completedlist?user=${id}`)
             .then(res => res.json())
 }
 export const getSunriseOrSunsetTimes = (trail) => {
@@ -77,7 +100,12 @@ export const getAirQuality = (trail) => {
     .then(response => response.json())
 }
 export const getCampsitesNearTrailId = ({trailId}) => {
-    return fetch(`http://localhost:8088/campingSites?_expand=trail&trail=${trailId}`)
+    return fetch(`http://localhost:8000/campingsites?trail=${trailId}`,{
+        headers: {
+            "Accept": "application/json",
+           "Authorization": `Token ${token}`
+        }
+    })
     .then(response => response.json())
 }
 

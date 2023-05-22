@@ -20,7 +20,7 @@ export const Login = ({setToken}) => {
         loginUser(user )
                 .then(res => {
                     if ("valid" in res && res.valid && "token" in res) {
-                        setToken(res.token, res.user_id)
+                        setToken(res.token, res.userId)
                         navigate("/trails")
                     }
                     else {
@@ -44,7 +44,7 @@ return <>
             </fieldset>
             <fieldset className="ml-4 mr-4 text-center mb-4">
                 <label htmlFor="inputPassword"> password </label>
-                <input ref={password} type="password" id="password" className="ml-2 rounded-lg border-slate-500 border-2 mt-4 mb-2" placeholder="Password" required />
+                <input ref={password} type="password" id="password" autoComplete="on" className="ml-2 rounded-lg border-slate-500 border-2 mt-4 mb-2" placeholder="Password" required />
             </fieldset>
             <fieldset className="">
                 <button type="submit" className=" btn btn-justColor font-light btn-sm mb-2">

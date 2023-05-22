@@ -9,14 +9,16 @@ export const PostByUserClicked = () => {
     const {userId} = useParams()
     const[userProfile, setUser] = useState({})
     const [screenHeight, setScreeHight] = useState("")
-    const localHiker = localStorage.getItem("hike_user")
-    const hikeUser = JSON.parse(localHiker)
+    const localUser = localStorage.getItem("hike_user")
+    const user = JSON.parse(localUser)
+    const hikeUser = user['userId']
+
+    console.log(userId)
     useEffect(
         () => {
             getUserProfileById(userId).then(
                 (data) => {
-                    const singleUser = data[0]
-                    setUser(singleUser)
+                    setUser(data)
                 }
             )
         }, [userId]
@@ -61,7 +63,7 @@ export const PostByUserClicked = () => {
     }
     return <>
     <div className={`h-${screenHeight}`}>
-    <h1 className="text-center font-title text-4xl pt-10 pb-6">{userProfile?.user?.fullName}'s Posts</h1>
+    <h1 className="text-center font-title text-4xl pt-10 pb-6">{userProfile?.user?.first_name}'s Posts</h1>
     <div className="font-title text-center flex flex-wrap justify-center">
     {
         reviews.map(review => {
@@ -75,14 +77,14 @@ export const PostByUserClicked = () => {
                 <div className="text=2xl mb-2 text-center">{review.title}</div>
                 </div>
                 <div className="w-80 mb-4 mx-auto" >
-                <Link to={`/trails/${review.trailId}`}> <img className="mx-auto w-[300px] h-[200px]" src={review.img} />
+                <Link to={`/trails/${review?.trail?.id}`}> <img className="mx-auto w-[300px] h-[200px]" src={review.img} />
                 </Link>
                </div>
                 <div>{review.description}</div>
                 <div>Rating: {starIcon} </div>
-                <div className="mb-4">Posted by {review?.user?.fullName} on {review.date}</div>
+                <div className="mb-4">Posted by {review?.user?.first_name} on {review.date}</div>
                 {
-                    review.userId === hikeUser.id ? <div className=" mb-2"><Link to={`/post/edit/${review.id}`} className="btn-sm p-2 btn-justColor font-light">Edit post</Link> </div>
+                    review?.user?.id === hikeUser ? <div className=" mb-2"><Link to={`/post/edit/${review.id}`} className="btn-sm p-2 btn-justColor font-light">Edit post</Link> </div>
                     : ""
                 }
                

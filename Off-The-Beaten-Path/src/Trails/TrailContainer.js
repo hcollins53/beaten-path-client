@@ -2,7 +2,7 @@ import { useState } from "react"
 import { TrailSearch } from "./TrailSearch"
 import { TrailList } from "./TrailList"
 
-export const TrailContainer = () => {
+export const TrailContainer = ({token}) => {
     const [searchTerms, setSearchTerms] = useState("")
     const[sortByDifficulty, setSortByDifficulty] = useState('')
     const[sortByMileage, setSortByMileage] = useState('')
@@ -12,7 +12,7 @@ export const TrailContainer = () => {
         <>
         <div className="">
 			<TrailSearch setterFunction={setSearchTerms} setSortByDifficulty={setSortByDifficulty} setSortByMileage={setSortByMileage} setSortByElevation={setSortByElevation} />
-			<TrailList searchTermState={searchTerms} sortByDifficulty={sortByDifficulty} sortByMileage={sortByMileage} sortByElevation={sortByElevation} />
+			<TrailList searchTermState={searchTerms} sortByDifficulty={sortByDifficulty} sortByMileage={sortByMileage} sortByElevation={sortByElevation} token={token}/>
          </div>
 		</>
     )
