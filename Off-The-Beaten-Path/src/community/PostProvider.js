@@ -1,65 +1,101 @@
+const localUser = localStorage.getItem("hike_user")
+    const user = JSON.parse(localUser)
+    const hikeUser = user['userId']
+    const token = user["token"]
 export const getReviews = () => {
-    return fetch(`http://localhost:8088/reviews?_expand=user`)
+    return fetch(`http://localhost:8000/reviews?_expand=user`, {
+        headers: {
+            "Accept": "application/json",
+           "Authorization": `Token ${token}`
+        }
+    })
     .then(res => res.json())
 }
 export const AddNewReview = (newReview) => {
-    return fetch("http://localhost:8088/reviews", {
+    return fetch("http://localhost:8000/reviews", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
             },
             body: JSON.stringify(newReview)
         })
             .then(res => res.json())
 }
 export const getReviewsByUser = (hikeUser) => {
-    return fetch(`http://localhost:8088/reviews?_expand=user&user=${hikeUser.id}`)
+    return fetch(`http://localhost:8000/reviews?user=${hikeUser}`, {
+        headers: {
+            "Accept": "application/json",
+           "Authorization": `Token ${token}`
+        }
+    })
     .then(res => res.json())
 }
 export const EditUserProfile = (userProfile) => {
-    return fetch(`http://localhost:8088/userProfiles/${userProfile.id}`, {
+    return fetch(`http://localhost:8000/userProfiles/${userProfile.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
             },
            body: JSON.stringify(userProfile) 
         }).then(
             response => response.json())
 }
 export const AddNewProfile = (newProfile) => {
-    return fetch("http://localhost:8088/userProfiles", {
+    return fetch("http://localhost:8000/userProfiles", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
             },
             body: JSON.stringify(newProfile)
         })
             .then(res => res.json())
 }
 export const getUserProfiles = () => {
-    return fetch(`http://localhost:8088/userProfiles?_expand=user`)
+    return fetch(`http://localhost:8000/userProfiles`, {
+        headers: {
+            "Accept": "application/json",
+           "Authorization": `Token ${token}`
+        }
+    })
     .then(res => res.json())
 }
 export const getReviewsByUserId = (id) => {
-    return fetch(`http://localhost:8088/reviews?_expand=user&user=${id}`)
+    return fetch(`http://localhost:8000/reviews?user=${id}`, {
+        headers: {
+            "Accept": "application/json",
+           "Authorization": `Token ${token}`
+        }
+    })
     .then(res => res.json())
 }
 export const DeletePost = review => {
-    return fetch(`http://localhost:8088/reviews/${review.id}`, {
-        method: "DELETE"
+    return fetch(`http://localhost:8000/reviews/${review.id}`, {
+        method: "DELETE",
+        headers: {
+            "Authorization": `Token ${token}`
+        }
     })
 }
 export const EditUserPost = (review) => {
-    return fetch(`http://localhost:8088/reviews/${review.id}`, {
+    return fetch(`http://localhost:8000/reviews/${review.id}`, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${token}`
             },
            body: JSON.stringify(review) 
         }).then(
             response => response.json())
 }
 export const getReview = (id) => {
-    return fetch(`http://localhost:8088/reviews?_expand=user&id=${id}`)
+    return fetch(`http://localhost:8000/reviews/${id}`, {
+        headers: {
+            "Accept": "application/json",
+           "Authorization": `Token ${token}`
+        }
+    })
     .then(res => res.json())
 }

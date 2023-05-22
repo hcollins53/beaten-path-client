@@ -7,9 +7,10 @@ import { DeleteWish } from "./TrailProvider"
 
 export const WishList = () => {
     const [wishList, setWishList] = useState([])
-    const [user, updateUser] = useState({})
-    const localHiker = localStorage.getItem("hike_user")
-    const hikeUser = JSON.parse(localHiker)
+   
+    const localUser = localStorage.getItem("hike_user")
+    const user = JSON.parse(localUser)
+    const hikeUser = user['userId']
     const navigate = useNavigate()
     const [screenHeight, setScreeHight] = useState("")
 
@@ -30,22 +31,23 @@ export const WishList = () => {
         
       } , []
     )
-    useEffect(
-        () => {
-            getUser(hikeUser).then(
-                (userData) => {
-                    const singleUser = userData[0]
-                    updateUser(singleUser)
-                }
-            )
-        }, []
-    )
+    // useEffect(
+    //     () => {
+    //         getUser(hikeUser).then(
+    //             (userData) => {
+    //                 const singleUser = userData[0]
+    //                 updateUser(singleUser)
+    //             }
+    //         )
+    //     }, []
+    // )
     const handleAddToCompleted = (event, wish) => {
+        console.log(wish)
         event.preventDefault()
         const AddCompleted = {
-            trailId: wish?.trail?.id,
-            userId: hikeUser.id,
-            date: new Date()
+            trail: wish?.trail?.id,
+            user: hikeUser,
+            date: new Date().toISOString().split('T')[0]
         }
 
         AddNewCompletedToList(AddCompleted).then(
@@ -66,7 +68,7 @@ export const WishList = () => {
     
     return <>
     <div className={`h-${screenHeight}`}>
-    <h1 className="text-3xl font-title text-center pt-6">{user?.fullName}'s Wish List</h1>
+    <h1 className="text-3xl font-title text-center pt-6">{wishList[0]?.user?.first_name}'s Wish List</h1>
     <section className="font-title pt-10 flex flex-wrap justify-center">
         {
             wishList.map(wish => {

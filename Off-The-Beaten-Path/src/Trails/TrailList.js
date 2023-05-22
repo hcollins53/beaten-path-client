@@ -28,7 +28,7 @@ export const TrailList = ({searchTermState, sortByDifficulty, sortByMileage, sor
     const [trails, setTrails] = useState([])
     const[filteredTrails, setFilteredTrails] = useState([])
     const navigate = useNavigate()
-   
+    
     useEffect(
         () => {
             getTrails()

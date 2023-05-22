@@ -2,9 +2,12 @@ import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getUserProfile } from "../auth/LoginProvider"
 
-export const NavBar = ({token, setToken, userId}) => {
+export const NavBar = ({setToken}) => {
     const navigate = useNavigate()
     //const localUser = localStorage.getItem('userId')
+    const localUser = localStorage.getItem("hike_user")
+    const user = JSON.parse(localUser)
+    const userId = user["userId"]
     const [userProfile, updateUserProfile] = useState({})
   
     useEffect(

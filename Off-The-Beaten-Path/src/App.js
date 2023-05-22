@@ -12,24 +12,27 @@ import { useState } from 'react';
 
 
 function App() {
-	const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
-	const [userId, setUserId] = useState(localStorage.getItem('userId'))
-	const setToken = (newToken, user_id) => {
-		localStorage.setItem('auth_token', newToken)
-		localStorage.setItem('userId', user_id)
-		setTokenState(newToken)
-		setUserId(user_id)
+	const [token, setTokenState] = useState(localStorage.getItem('hike_user'))
+	
+	const setToken = (auth_token, user_id) => {
+		let token = {
+			"token": auth_token,
+			"userId": user_id
+		}
+		localStorage.setItem('hike_user', JSON.stringify(token))
+		setTokenState(token)
 	  }
+	
   return <>
    <Routes>
-        <Route path="/login" element={<Login token={token} setToken={setToken} />} />
-		  <Route path="/register" element={<Register token={token} setToken={setToken} />} />  
+        <Route path="/login" element={<Login  setToken={setToken} />} />
+		  <Route path="/register" element={<Register setToken={setToken} />} />  
 
 		<Route path="*" element={
-			<Authorized token={token} setToken={setToken}>
+			<Authorized token={token} >
 				<>
-					<NavBar token={token} setToken={setToken} userId ={userId} />
-					<ApplicationViews />
+					<NavBar token={token} />
+					<ApplicationViews token={token}/>
 				</>
 			</Authorized>
 

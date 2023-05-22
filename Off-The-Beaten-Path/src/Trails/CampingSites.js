@@ -20,7 +20,7 @@ useEffect(
     () => {
         getTrailById({trailId}).then (
             (trailObj) => {
-                setTrail(trailObj[0])
+                setTrail(trailObj)
             }
 )
     }, [trailId]

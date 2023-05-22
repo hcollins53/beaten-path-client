@@ -27,8 +27,8 @@ export const TrailDetails = () => {
         () => {
             getTrailById({trailId})
                 .then((data) => {
-                   const singleTrail = data[0]
-                   updateTrail(singleTrail)
+                   updateTrail(data)
+                   
                 })
         },
         [trailId]
@@ -173,7 +173,7 @@ export const TrailDetails = () => {
     
     return <>
     <article className="h-screen">
-    <h1 className="text-4xl font-title text-center pt-10 font-bold bg-paleDogwood">{trail.name}</h1>
+    <h1 className="text-4xl font-title text-center pt-10 font-bold bg-paleDogwood">{trail?.name}</h1>
     <section className="flex pt-16 justify-evenly">
     <section className="text-center font-body flex-col bg-paleDogwood">
         <div className="group h-full w-full [perspective:1000px] ">
