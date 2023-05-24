@@ -4,8 +4,9 @@ import { getUsers } from "../auth/LoginProvider"
 import { AddNewMessage } from "./MessageProvider"
 
 export const MessageForm = () => {
-    const localHiker = localStorage.getItem("hike_user")
-    const hikeUser = JSON.parse(localHiker)
+    const localUser = localStorage.getItem("hike_user")
+    const user = JSON.parse(localUser)
+    const hikeUser = user['userId']
     const[users, setUsers] = useState([])
     const navigate = useNavigate()
     useEffect(
@@ -18,18 +19,18 @@ export const MessageForm = () => {
         }, []
     )
     const[message, updateMessage] = useState({
-        senderId: 0,
-        receiverId: 0,
+        sender: 0,
+        receiver: 0,
         body: "",
         date: ""
     })
     const handleSaveButtonClick =(event) => {
         event.preventDefault()
         const newMessage = {
-            senderId: hikeUser.id,
-            receiverId: message.receiverId,
+            sender: hikeUser,
+            receiver: message.receiver,
             body: message.body,
-            date: new Date().toLocaleString()
+            date: new Date().toISOString().split('T')[0]
         }
         AddNewMessage(newMessage).then(
             () => {
@@ -49,16 +50,16 @@ export const MessageForm = () => {
                     onChange={
                     (evt) => {
                         const copy = {...message}
-                        copy.receiverId = parseInt(evt.target.value)
+                        copy.receiver = parseInt(evt.target.value)
                         updateMessage(copy)
                     }}>
-                <option name= "receiverId">Choose a receiver</option>
+                <option name= "receiver">Choose a receiver</option>
 
                 {
                 users.map((users) => {
                    return (
                     <option 
-                        value={users.id}> {users.fullName}</option> 
+                        value={users.id}> {users.first_name}</option> 
                    )})
             } 
          </select>

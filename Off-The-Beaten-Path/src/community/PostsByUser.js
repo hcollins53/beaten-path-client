@@ -13,12 +13,12 @@ export const PostByUserClicked = () => {
     const user = JSON.parse(localUser)
     const hikeUser = user['userId']
 
-    console.log(userId)
     useEffect(
         () => {
             getUserProfileById(userId).then(
                 (data) => {
-                    setUser(data)
+                    const singleProfile = data[0]
+                    setUser(singleProfile)
                 }
             )
         }, [userId]
@@ -70,7 +70,7 @@ export const PostByUserClicked = () => {
             const starIcon = StarAmounts(review.rating)
             return <section className="p-4 m-10 border w-96 h-full ml-80 mr-80 flex flex-col border-2 border-black shadow-xl rounded-xl bg-silver">
                 {
-                    review.userId === hikeUser.id ? <div className="flex justify-end"><button className="btn-sm btn-justColor font-light" onClick={(clickEvent) => handleDelete(clickEvent, review)}>x</button> </div>
+                    review.user?.id === hikeUser ? <div className="flex justify-end"><button className="btn-sm btn-justColor font-light" onClick={(clickEvent) => handleDelete(clickEvent, review)}>x</button> </div>
                     : ""
                 }
                 <div className="flex justify-center">

@@ -7,10 +7,10 @@ import { AddNewMessage } from "./MessageProvider";
 
 export const MessageDetails = ({fullMessages, userId, updateMessages }) => {
     const[userProfile, updateUser] = useState({})
-    const[isLoading, setIsLoading] = useState(true)
     const[myMessages, setMyMessages]= useState([])
-    const localHiker = localStorage.getItem("hike_user")
-    const hikeUser = JSON.parse(localHiker)
+    const localUser = localStorage.getItem("hike_user")
+    const userObject = JSON.parse(localUser)
+    const hikeUser = userObject['userId']
     useEffect(
         () => {
            if(userId) {
@@ -18,7 +18,6 @@ export const MessageDetails = ({fullMessages, userId, updateMessages }) => {
                 (data) => {
                     const singleUser = data
                     updateUser(singleUser)
-                    setIsLoading(false)
                 })}}, [userId]
     )
     useEffect(
@@ -28,12 +27,12 @@ export const MessageDetails = ({fullMessages, userId, updateMessages }) => {
     )
     const getMessages = () => {
         if(fullMessages.length)
-       { let messages = fullMessages.filter(message => message.senderId === parseInt(userId) || message.receiverId === parseInt(userId))
+       { let messages = fullMessages.filter(message => message.sender === parseInt(userId) || message.receiver === parseInt(userId))
         setMyMessages(messages)}
     }
     const SortMessages = () => {
        return myMessages?.map(message =>{
-            if(message.senderId === parseInt(userId)) {
+            if(message.sender === parseInt(userId)) {
               return <div className="chat chat-start">
                <div className="mb-2 chat-bubble max-w-xs"> {message.body} </div> <div className="chat-footer opacity-50">
                Delivered
@@ -52,11 +51,12 @@ export const MessageDetails = ({fullMessages, userId, updateMessages }) => {
    const handleSendButtonClick = (event) => {
     event.preventDefault()
     const newMessage = {
-        senderId: hikeUser.id,
-        receiverId: parseInt(userId),
+        sender: hikeUser,
+        receiver: parseInt(userId),
         body: inputRef.current.value,
-        date: new Date().toLocaleString()
+        date: new Date().toISOString().split('T')[0]
     }
+    console.log(newMessage)
     AddNewMessage(newMessage).then(
         () => {
             updateMessages()
@@ -73,7 +73,7 @@ export const MessageDetails = ({fullMessages, userId, updateMessages }) => {
                 : ""
             }
             {
-                userProfile ? <Link to={`/userProfile/${userId}`}>{userProfile[0]?.user?.fullName}</Link>
+                userProfile ? <Link to={`/userProfile/${userId}`}>{userProfile[0]?.user?.first_name}</Link>
                 : ""
             }
         

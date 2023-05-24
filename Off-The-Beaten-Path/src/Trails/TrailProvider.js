@@ -33,10 +33,11 @@ export const AddNewTrail = (newTrail) => {
             .then(res => res.json())
 }
 export const AddNewWishList = (newWish) => {
-    return fetch(`http://localhost:8000/wantlist`, {
+    return fetch(`http://localhost:8000/wantlists`, {
          method: "POST",
          headers: {
-             "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Token ${token}`
          },
         body: JSON.stringify(newWish) 
      })
@@ -62,8 +63,11 @@ export const AddNewCompletedToList = (newCompleted) => {
      })
  }
  export const DeleteWish = wish => {
-    return fetch(`http://localhost:8000/wantlist/${wish.id}`, {
-        method: "DELETE"
+    return fetch(`http://localhost:8000/wantlists/${wish.id}`, {
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+           "Authorization": `Token ${token}`}
     })
 }
 export const getUserCompletedList = () => {
@@ -109,7 +113,13 @@ export const getCampsitesNearTrailId = ({trailId}) => {
     .then(response => response.json())
 }
 
-
+export const getTrailsByHttpString = (httpString) => {
+    return fetch(`http://localhost:8000/trails?${httpString}`, {
+      headers: {
+        "Authorization": `Token ${token}`
+      }
+    }).then((res) => res.json());
+  }
 
 
 
