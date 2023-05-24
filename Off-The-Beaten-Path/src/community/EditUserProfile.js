@@ -6,12 +6,13 @@ import { EditUserProfile } from "./PostProvider"
 
 
 export const UserProfileEdit = () => {
-    const localHiker = localStorage.getItem("hike_user")
-    const hikeUser = JSON.parse(localHiker)
+    const localUser = localStorage.getItem("hike_user")
+    const user = JSON.parse(localUser)
+    const hikeUser = user['userId']
     const [trails, setTrails] = useState([])
     const [userProfile, updateUserProfile] = useState({
             image: "",
-            favoriteHike: "",
+            favorite_hike: "",
             description: "",
             area: ""
     })
@@ -71,10 +72,10 @@ export const UserProfileEdit = () => {
                             onChange={
                             (evt) => {
                                 const copy = {...userProfile}
-                                copy.favoriteHike = evt.target.value
+                                copy.favorite_hike = evt.target.value
                                 updateUserProfile(copy)
                             }}>
-                        <option name= "favoriteHike">Choose a favorite hike</option>
+                        <option name= "favorite_hike">Choose a favorite hike</option>
 
                         {
                         trails.map((trail) => {

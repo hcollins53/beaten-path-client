@@ -32,7 +32,7 @@ function App() {
 			<Authorized token={token} >
 				<>
 					<NavBar token={token} />
-					<ApplicationViews token={token}/>
+					<ApplicationViews />
 				</>
 			</Authorized>
 

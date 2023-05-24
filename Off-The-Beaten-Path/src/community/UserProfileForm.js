@@ -5,14 +5,15 @@ import { AddNewProfile } from "./PostProvider"
 
 
 export const UserProfileForm = () => {
-    const localHiker = localStorage.getItem("hike_user")
-    const hikeUser = JSON.parse(localHiker)
+    const localUser = localStorage.getItem("hike_user")
+    const user = JSON.parse(localUser)
+    const hikeUser = user['userId']
     const navigate = useNavigate()
     const [trails, setTrails] = useState([])
     const [userProfile, update] = useState({
-        userId: 0,
+        user: 0,
         image: "",
-        favoriteHike: "",
+        favorite_hike: "",
         description: "",
         area: ""
     })
@@ -29,9 +30,9 @@ export const UserProfileForm = () => {
         event.preventDefault()
 
         const newUserProfile = {
-            userId: hikeUser.id,
+            user: hikeUser,
         image: userProfile.image,
-        favoriteHike: userProfile.favoriteHike,
+        favorite_hike: userProfile.favorite_hike,
         description: userProfile.description,
         area: userProfile.area
         }

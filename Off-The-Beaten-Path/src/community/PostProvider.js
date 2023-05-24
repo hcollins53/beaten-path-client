@@ -32,7 +32,7 @@ export const getReviewsByUser = (hikeUser) => {
     .then(res => res.json())
 }
 export const EditUserProfile = (userProfile) => {
-    return fetch(`http://localhost:8000/userProfiles/${userProfile.id}`, {
+    return fetch(`http://localhost:8000/userprofiles/${userProfile.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -43,7 +43,7 @@ export const EditUserProfile = (userProfile) => {
             response => response.json())
 }
 export const AddNewProfile = (newProfile) => {
-    return fetch("http://localhost:8000/userProfiles", {
+    return fetch("http://localhost:8000/userprofiles", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -54,7 +54,7 @@ export const AddNewProfile = (newProfile) => {
             .then(res => res.json())
 }
 export const getUserProfiles = () => {
-    return fetch(`http://localhost:8000/userProfiles`, {
+    return fetch(`http://localhost:8000/userprofiles`, {
         headers: {
             "Accept": "application/json",
            "Authorization": `Token ${token}`

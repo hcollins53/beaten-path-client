@@ -7,8 +7,9 @@ import { getUserProfile } from "../auth/LoginProvider"
 import { UserNamesListed } from "./LeftSide"
 
 export const UserMessages = ({searchTermState}) => {
-    const localHiker = localStorage.getItem("hike_user")
-    const hikeUser = JSON.parse(localHiker)
+    const localUser = localStorage.getItem("hike_user")
+    const user = JSON.parse(localUser)
+    const hikeUser = user['userId']
     const [userProfile, updateUserProfile] = useState({})
     const[sentMessages, updateSentMessages] = useState([])
     const[receivedMessages, updateReceivedMessages] = useState([])
@@ -45,12 +46,14 @@ export const UserMessages = ({searchTermState}) => {
     useEffect(() => {
         SortFullMessages()
         }, [receivedMessages, sentMessages])
+
+    
      useEffect(
         () => {
             if(fullMessages.length) {
                 const uniqueNames = fullMessages.filter((message, index, array) => {
                     for (let i = 0; i < index; i++) {
-                      if (array[i].senderId === message.senderId && array[i].receiverId === message.receiverId || array[i].receiverId === message.senderId && array[i].senderId === message.receiverId ) {
+                      if (((array[i].sender === message.sender) && (array[i].receiver === message.receiver)) || ((array[i].receiver === message.sender) && (array[i].sender === message.receiver)) ) {
                         return false
                       }
                     }
@@ -77,7 +80,7 @@ export const UserMessages = ({searchTermState}) => {
         if (receivedMessages.length || sentMessages.length) {
             const newSentMessages = sentMessages.map(sentMessage => {
               const messages = receivedMessages.filter(receivedMessage => {
-                return sentMessage.receiverId === receivedMessage.senderId;
+                return sentMessage.receiver === receivedMessage.sender;
               })
               messages.push(sentMessage)
               return messages;
@@ -85,7 +88,7 @@ export const UserMessages = ({searchTermState}) => {
           
             const newReceivedMessages = receivedMessages.map(receivedMessage => {
               const messages = sentMessages.filter(sentMessage => {
-                return receivedMessage.senderId === sentMessage.receiverId;
+                return receivedMessage.sender === sentMessage.receiver;
               })
               messages.push(receivedMessage);
               return messages;
@@ -94,7 +97,7 @@ export const UserMessages = ({searchTermState}) => {
             .sort((a, b) => a.date - b.date);
             const uniqueMessages = mergedMessages.filter((message, index, array) => {
                 for (let i = 0; i < index; i++) {
-                  if (array[i].senderId === message.senderId && array[i].receiverId === message.receiverId && array[i].body === message.body) {
+                  if (array[i].sender === message.sender && array[i].receiver === message.receiver && array[i].body === message.body) {
                     return false
                   }
                 }

@@ -15,8 +15,9 @@ export const TrailDetails = () => {
     const [weather, setWeather] = useState({})
     const [image, setClass] = useState("")
     const[icon, setIcon] =useState("")
-    const localHiker = localStorage.getItem("hike_user")
-    const hikeUser = JSON.parse(localHiker)
+    const localUser = localStorage.getItem("hike_user")
+    const user = JSON.parse(localUser)
+    const hikeUser = user['userId']
     const navigate = useNavigate()
     const[wishList, setWishList] = useState([])
     const[completedList, setCompletedList] = useState([])
@@ -86,8 +87,8 @@ export const TrailDetails = () => {
         const handleAddButton = (event) => {
             event.preventDefault()
             const AddWishList = {
-                trailId: parseInt(trailId),
-                userId: hikeUser.id
+                trail: parseInt(trailId),
+                user: hikeUser
             }
 
             AddNewWishList(AddWishList).then(

@@ -4,15 +4,16 @@ import { AddNewReview } from "./PostProvider"
 
 export const Review = () => {
     const navigate = useNavigate()
-    const localHiker = localStorage.getItem("hike_user")
-    const hikeUser = JSON.parse(localHiker)
+    const localUser = localStorage.getItem("hike_user")
+    const user = JSON.parse(localUser)
+    const hikeUser = user['userId']
     const {trailId} = useParams()
     const[rating, setRating] = useState(null)
    
     const[review, update] = useState({
         title: "",
-        trailId: "",
-        userId: "",
+        trail: "",
+        user: "",
         description: "",
         rating: 0,
         img: "",
@@ -24,12 +25,12 @@ export const Review = () => {
 
         const newReview= {
             title: review.title,
-            trailId: parseInt(trailId),
-            userId: hikeUser.id,
+            trail: parseInt(trailId),
+            user: hikeUser,
             description: review.description,
             rating: parseInt(rating),
             img: review.img,
-            date: new Date().toLocaleDateString()
+            date: new Date().toISOString().split('T')[0]
         }
        AddNewReview(newReview)
             .then(() => {

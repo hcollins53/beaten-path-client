@@ -7,8 +7,9 @@ import { getUserProfileById } from "../auth/LoginProvider"
 export const UserNamesListed = ({ userToDisplay, UserNameClicked}) => {
     const[users, setUsers] =useState([])
     const[user, setUser] = useState(null)
-    const localHiker = localStorage.getItem("hike_user")
-    const hikeUser = JSON.parse(localHiker)
+    const localUser = localStorage.getItem("hike_user")
+    const userObject = JSON.parse(localUser)
+    const hikeUser = userObject['userId']
     const [userProfile, updateUserProfile] = useState({})
     useEffect(
         () => {
@@ -20,7 +21,7 @@ export const UserNamesListed = ({ userToDisplay, UserNameClicked}) => {
     )
     useEffect(
         () => {
-            if(users.length && userToDisplay.body)
+            if(users.length && userToDisplay)
           {findUser()}
         }, [users, userToDisplay]
     )
@@ -35,14 +36,14 @@ export const UserNamesListed = ({ userToDisplay, UserNameClicked}) => {
         }, [user]
     )
         const findUser = () => {
-            const sender = users.find((u) => u.id === userToDisplay.senderId)
-            const receiver = users.find((u) => u.id === userToDisplay.receiverId)
-                    if (sender.id !== hikeUser.id) {
-                        setUser(sender)
-                        } else {
+            const sender = users.find((u) => u.id === userToDisplay.sender)
+            const receiver = users.find((u) => u.id === userToDisplay.receiver)
+                    if (sender.id !== hikeUser) {
+                            setUser(sender)
+                        } 
+                    else {
                         setUser(receiver)
-                        }
-                }
+                        }}
         
     const handleClickUserName = (event) => {
         event.preventDefault()
@@ -61,7 +62,7 @@ export const UserNamesListed = ({ userToDisplay, UserNameClicked}) => {
             <button 
             onClick={(clickEvent) => handleClickUserName(clickEvent)} value={user.id} >
           {
-            user ? `${user.fullName}` 
+            user ? `${user.first_name}` 
             : ""
           }
           </button>

@@ -20,7 +20,7 @@ import { CampingSitesNearTrail } from "../Trails/CampingSites"
 
 
 
-export const ApplicationViews = ({token}) => {
+export const ApplicationViews = () => {
     return <>
         <div className="bg-paleDogwood h-full w-full">
         <Routes>

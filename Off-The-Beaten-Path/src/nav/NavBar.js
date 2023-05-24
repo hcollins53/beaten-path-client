@@ -69,10 +69,8 @@ export const NavBar = ({setToken}) => {
           </Link>
         </li>
         <li>
-            <Link className="navbar__link" to="" onClick={() => {
+            <Link className="navbar__link" to="/login" onClick={() => {
                     setToken("");
-                    navigate("/login");
-                  
          }}>Logout</Link>
      </li>
       </ul>

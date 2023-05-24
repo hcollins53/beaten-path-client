@@ -28,11 +28,19 @@ export const loginUser = (user) => {
 
 
 export const getUser = (hikeUser) => {
-    return fetch(`http://localhost:8088/users?id=${hikeUser.id}`)
+    return fetch(`http://localhost:8000/users/${hikeUser}`, {
+      headers: {
+        "Accept": "application/json",
+        "Authorization": `Token ${token}`
+      }})
                 .then(res => res.json())
 }
 export const getUsers = () => {
-    return fetch(`http://localhost:8088/users`)
+    return fetch(`http://localhost:8000/users`, {
+      headers: {
+        "Accept": "application/json",
+        "Authorization": `Token ${token}`
+      }})
                 .then(res => res.json())
 }
 export const getUserProfile = (userId) => {
@@ -44,11 +52,11 @@ export const getUserProfile = (userId) => {
                 .then(res => res.json())
 }
 export const getUserById = (id) => {
-    return fetch(`http://localhost:8088/users/${id}`)
+    return fetch(`http://localhost:8000/users/${id}`)
                 .then(res => res.json())
 }
 export const getUserProfileById = (id) => {
-    return fetch(`http://localhost:8088/userProfiles?user=${id}`, {
+    return fetch(`http://localhost:8000/userprofiles?user=${id}`, {
       headers: {
         "Accept": "application/json",
         "Authorization": `Token ${token}`
