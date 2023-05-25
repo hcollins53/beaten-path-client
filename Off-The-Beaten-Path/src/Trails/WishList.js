@@ -7,10 +7,10 @@ import { DeleteWish } from "./TrailProvider"
 
 export const WishList = () => {
     const [wishList, setWishList] = useState([])
-   
+    const [user, updateUser] = useState({})
     const localUser = localStorage.getItem("hike_user")
-    const user = JSON.parse(localUser)
-    const hikeUser = user['userId']
+    const userObj = JSON.parse(localUser)
+    const hikeUser = userObj['userId']
     const navigate = useNavigate()
     const [screenHeight, setScreeHight] = useState("")
 
@@ -31,16 +31,15 @@ export const WishList = () => {
         
       } , []
     )
-    // useEffect(
-    //     () => {
-    //         getUser(hikeUser).then(
-    //             (userData) => {
-    //                 const singleUser = userData[0]
-    //                 updateUser(singleUser)
-    //             }
-    //         )
-    //     }, []
-    // )
+    useEffect(
+        () => {
+            getUser(hikeUser).then(
+                (userData) => {
+                    updateUser(userData)
+                }
+            )
+        }, []
+    )
     const handleAddToCompleted = (event, wish) => {
         console.log(wish)
         event.preventDefault()
@@ -68,7 +67,7 @@ export const WishList = () => {
     
     return <>
     <div className={`h-${screenHeight}`}>
-    <h1 className="text-3xl font-title text-center pt-6">{wishList[0]?.user?.first_name}'s Wish List</h1>
+    <h1 className="text-3xl font-title text-center pt-6">{user?.first_name}'s Wish List</h1>
     <section className="font-title pt-10 flex flex-wrap justify-center">
         {
             wishList.map(wish => {
@@ -79,7 +78,7 @@ export const WishList = () => {
                    }
                    </div>
                     <div className="mb-4 text-xl text-center">
-                        <Link to={`/trails/${wish.trailId}`}>{wish?.trail?.name}</Link></div>
+                        <Link to={`/trails/${wish.trail?.id}`}>{wish?.trail?.name}</Link></div>
                     <div className="w-80 h-64 mx-auto"><img className="h-56 mx-auto" src={wish?.trail?.img}/></div>
                     <div className="flex flex-row">
                     <button onClick={(clickEvent) => handleAddToCompleted(clickEvent, wish)}

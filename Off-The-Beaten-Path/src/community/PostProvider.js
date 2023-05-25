@@ -87,8 +87,7 @@ export const EditUserPost = (review) => {
                 "Authorization": `Token ${token}`
             },
            body: JSON.stringify(review) 
-        }).then(
-            response => response.json())
+        })
 }
 export const getReview = (id) => {
     return fetch(`http://localhost:8000/reviews/${id}`, {

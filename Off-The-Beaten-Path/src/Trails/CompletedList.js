@@ -7,10 +7,10 @@ import { getReviewsByUser } from "../community/PostProvider"
 
 export const CompletedList = () => {
     const[completed, setCompleted] = useState([])
-    
+    const [user, updateUser] = useState({})
     const localUser = localStorage.getItem("hike_user")
-    const user = JSON.parse(localUser)
-    const hikeUser = user['userId']
+    const userObj = JSON.parse(localUser)
+    const hikeUser = userObj['userId']
     const [reviews, setReviews] = useState([])
     const [screenHeight, setScreeHight] = useState("")
     useEffect(
@@ -36,16 +36,15 @@ export const CompletedList = () => {
             )
         }, []
     )
-    // useEffect(
-    //     () => {
-    //         getUser(hikeUser).then(
-    //             (userData) => {
-    //                 const singleUser = userData[0]
-    //                 updateUser(singleUser)
-    //             }
-    //         )
-    //     }, []
-    // )
+    useEffect(
+        () => {
+            getUser(hikeUser).then(
+                (userData) => {
+                    updateUser(userData)
+                }
+            )
+        }, []
+    )
     const checkIfUserHasWrittenAReview = (complete) => {
        const completedReview =  reviews.find(review =>  review?.trail?.id === complete?.trail?.id)
        if(typeof completedReview === 'undefined') {
@@ -56,7 +55,7 @@ export const CompletedList = () => {
     }
     return <>
     <article className={`h-${screenHeight}`}>
-    <h1 className="text-3xl font-title text-center pt-12">{completed[0]?.user?.first_name}'s Completed Trail List</h1>
+    <h1 className="text-3xl font-title text-center pt-12">{user.first_name}'s Completed Trail List</h1>
     <section className="font-title pt-10 flex flex-wrap justify-center">
         {
             completed.map(complete => {

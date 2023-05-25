@@ -2,20 +2,22 @@ import React, { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { getReview } from "./PostProvider"
 import { EditUserPost } from "./PostProvider"
+import { getTrailById } from "../Trails/TrailProvider"
 
 
 
 export const EditPost = () => {
     const navigate = useNavigate()
-    const localHiker = localStorage.getItem("hike_user")
-    const hikeUser = JSON.parse(localHiker)
+    const localUser = localStorage.getItem("hike_user")
+    const user = JSON.parse(localUser)
+    const hikeUser = user['userId']
     const {reviewId} = useParams()
     const[ratingStar, setRating] = useState(null)
     
     const[review, update] = useState({
         title: "",
-        trailId: "",
-        userId: "",
+        trail: "",
+        user: "",
         description: "",
         rating: 0,
         img: "",
@@ -24,12 +26,13 @@ export const EditPost = () => {
     () => {
         getReview(reviewId).then(
             (data) => {
-                const singleReview = data[0]
-                update(singleReview)
-            }
-        )
+                update(data)
+            })
+            
     },[]
   )
+            
+  
   useEffect(
     () => {
         let copy = {...review}
@@ -40,10 +43,18 @@ export const EditPost = () => {
   )
     const handleSaveButtonClick = (event) => {
         event.preventDefault()
-
-       EditUserPost(review)
+       EditUserPost({
+        id: review.id,
+        date: review.date,
+        description: review.description,
+        rating: review.rating,
+        img: review.img,
+        title: review.title,
+        trail: review.trail.indexOf,
+        user: review.user.id
+       })
             .then(() => {
-               navigate(`/posts/${hikeUser.id}`)
+               navigate(`/posts/${hikeUser}`)
             }) 
     }
     const handleRating = (event) => {

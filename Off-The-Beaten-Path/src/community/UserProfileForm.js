@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { getTrails } from "../Trails/TrailProvider"
 import { AddNewProfile } from "./PostProvider"
@@ -8,6 +8,7 @@ export const UserProfileForm = () => {
     const localUser = localStorage.getItem("hike_user")
     const user = JSON.parse(localUser)
     const hikeUser = user['userId']
+
     const navigate = useNavigate()
     const [trails, setTrails] = useState([])
     const [userProfile, update] = useState({
@@ -17,6 +18,8 @@ export const UserProfileForm = () => {
         description: "",
         area: ""
     })
+
+    
     useEffect(
         () => {
             getTrails()
@@ -38,6 +41,7 @@ export const UserProfileForm = () => {
         }
         AddNewProfile(newUserProfile).then(
             () => {
+                
                 navigate("/profile")
                 //how to rerender the navBar too
             }
@@ -74,10 +78,10 @@ export const UserProfileForm = () => {
                     onChange={
                     (evt) => {
                         const copy = {...userProfile}
-                        copy.favoriteHike = evt.target.value
+                        copy.favorite_hike = evt.target.value
                         update(copy)
                     }}>
-                <option name= "favoriteHike">Choose a favorite hike</option>
+                <option name= "favorite_hike">Choose a favorite hike</option>
 
                 {
                 trails.map((trail) => {

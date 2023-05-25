@@ -10,6 +10,7 @@ export const UserProfile = () => {
     const [userProfile, updateUserProfile] = useState({})
     useEffect(
         () => {
+           
             getUserProfile(hikeUser).then(
                 (userData) => {
                     const singleUser = userData[0]
