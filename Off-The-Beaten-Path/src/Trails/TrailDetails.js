@@ -26,7 +26,7 @@ export const TrailDetails = () => {
     const[airQuality, setAirQuality] = useState([])
     useEffect(
         () => {
-            getTrailById({trailId})
+            getTrailById(trailId)
                 .then((data) => {
                    updateTrail(data)
                    

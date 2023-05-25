@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { getUserProfile } from "../auth/LoginProvider"
 
 export const NavBar = ({setToken}) => {
@@ -9,15 +9,16 @@ export const NavBar = ({setToken}) => {
     const user = JSON.parse(localUser)
     const userId = user["userId"]
     const [userProfile, updateUserProfile] = useState({})
-  
+    
     useEffect(
         () => {
-            getUserProfile(userId).then(
+         
+          getUserProfile(userId).then(
                 (userData) => {
                     const singleUser = userData[0]
                     updateUserProfile(singleUser)
                 })
-        }, []
+        }, [userId, userProfile]
     )
     return (
         <div className="navbar bg-paleDogwood w-full bg-cover text-black relative shadow-lg font-title sticky top-0 z-50">

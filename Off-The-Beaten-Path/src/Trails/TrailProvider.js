@@ -23,7 +23,7 @@ export const AddNewTrail = (newTrail) => {
         body: JSON.stringify(newTrail) 
      })
  }
- export const getTrailById = ({trailId}) => {
+ export const getTrailById = (trailId) => {
     return fetch(`http://localhost:8000/trails/${trailId}`, {
         headers: {
             "Accept": "application/json",
@@ -43,8 +43,8 @@ export const AddNewWishList = (newWish) => {
      })
  }
 
-export const GetUserWishList = () => {
-    return fetch(`http://localhost:8000/wantlists?user=${hikeUser}`, {
+export const GetUserWishList = (userId) => {
+    return fetch(`http://localhost:8000/wantlists?user=${userId}`, {
         headers: {
             "Accept": "application/json",
            "Authorization": `Token ${token}`
@@ -70,8 +70,8 @@ export const AddNewCompletedToList = (newCompleted) => {
            "Authorization": `Token ${token}`}
     })
 }
-export const getUserCompletedList = () => {
-    return fetch(`http://localhost:8000/completedlists?user=${hikeUser}`, {
+export const getUserCompletedList = (userId) => {
+    return fetch(`http://localhost:8000/completedlists?user=${userId}`, {
         headers: {
             "Accept": "application/json",
            "Authorization": `Token ${token}`
@@ -87,14 +87,14 @@ export const getWeather = (trail) => {
 export const WeatherIcon = (icon) => {
     return (`http://openweathermap.org/img/wn/${icon}.png`)
 }
-export const GetUserWishListById = (id) => {
-    return fetch(`http://localhost:8088/wantlist?user=${id}`)
-            .then(res => res.json())
-}
-export const getUserCompletedListById = (id) => {
-    return fetch(`http://localhost:8088/completedlist?user=${id}`)
-            .then(res => res.json())
-}
+// export const GetUserWishListById = (id) => {
+//     return fetch(`http://localhost:8088/wantlist?user=${id}`)
+//             .then(res => res.json())
+// }
+// export const getUserCompletedListById = (id) => {
+//     return fetch(`http://localhost:8088/completedlist?user=${id}`)
+//             .then(res => res.json())
+// }
 export const getSunriseOrSunsetTimes = (trail) => {
     return fetch(`https://api.sunrise-sunset.org/json?lat=${trail.lat}&lng=${trail.lon}&date=today`)
     .then(response => response.json())

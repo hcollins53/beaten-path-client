@@ -23,7 +23,9 @@ function App() {
 		setTokenState(token)
 	  }
 	
+
   return <>
+  
    <Routes>
         <Route path="/login" element={<Login  setToken={setToken} />} />
 		  <Route path="/register" element={<Register setToken={setToken} />} />  

@@ -7,7 +7,6 @@ export const Register = ({setToken}) => {
     const firstName = useRef()
     const lastName = useRef()
     const username = useRef()
-    const bio = useRef()
     const password = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
@@ -23,15 +22,14 @@ export const Register = ({setToken}) => {
                 "username": username.current.value,
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
-                "bio": bio.current.value,
                 "password": password.current.value
             }
 
             registerUser(newUser)
                 .then(res => {
                     if ("token" in res) {
-                        setToken(res.token)
-                        navigate("/")
+                        setToken(res.token, res.userId)
+                        navigate("/trails")
                     }
                 })
         } else {
@@ -68,14 +66,10 @@ export const Register = ({setToken}) => {
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="mx-auto rounded-lg border-slate-500 border-2 mt-2 w-[200px]" placeholder="Verify password" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
-                    <textarea ref={bio} name="bio" className="mx-auto rounded-lg border-slate-500 border-2 mt-2 w-[200px]" placeholder="Let other gamers know a little bit about you..." />
-                </fieldset>
-                <fieldset>
                     <button className="btn btn-justColor font-light btn-sm" type="submit"> Register </button>
                 </fieldset>
             </form>
-            <section className="link--register">
+            <section className="m-auto w-96 bg-slate-200 bg-opacity-60 shadow-lg rounded-lg">
                 Already registered? <Link to="/login">Login</Link>
             </section>
         </main>

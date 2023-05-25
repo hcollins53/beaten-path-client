@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import { useParams, Link} from "react-router-dom"
 import { getUserProfileById } from "../auth/LoginProvider"
-import { GetUserWishListById } from "../Trails/TrailProvider"
-import { getUserCompletedListById } from "../Trails/TrailProvider"
+import { GetUserWishList } from "../Trails/TrailProvider"
+import { getUserCompletedList } from "../Trails/TrailProvider"
 
 
 export const UserInformation = () => {
@@ -23,12 +23,12 @@ export const UserInformation = () => {
     )
     useEffect(
         () => {
-            GetUserWishListById(userId).then(
+            GetUserWishList(userId).then(
                 (wishArray) => {
                     setWishList(wishArray)
             }
             ).then(
-                getUserCompletedListById(userId).then(
+                getUserCompletedList(userId).then(
                     (completedArray) => {
                         setCompleted(completedArray)
                     }
