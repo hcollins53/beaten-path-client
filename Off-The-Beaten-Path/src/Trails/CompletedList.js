@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
-import { getUser } from "../auth/LoginProvider"
 import { Link, useNavigate } from "react-router-dom"
 import { getUserCompletedList } from "./TrailProvider"
 import { getReviewsByUser } from "../community/PostProvider"
+import { getUser } from "../community/UserProvider"
 
 
 export const CompletedList = () => {
