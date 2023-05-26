@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import { getUserProfile } from "../auth/LoginProvider"
 import { Link } from "react-router-dom"
+import { getUserProfile } from "./UserProvider"
 
 
 export const UserProfile = () => {

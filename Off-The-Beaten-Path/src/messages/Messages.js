@@ -3,8 +3,8 @@ import { useEffect, useState } from "react"
 import { getUserSentMessages } from "./MessageProvider"
 import { getUserReceivedMessages } from "./MessageProvider"
 import { MessageDetails } from "./MessageDetails"
-import { getUserProfile } from "../auth/LoginProvider"
 import { UserNamesListed } from "./LeftSide"
+import { getUserProfile } from "../community/UserProvider"
 
 export const UserMessages = ({searchTermState}) => {
     const localUser = localStorage.getItem("hike_user")

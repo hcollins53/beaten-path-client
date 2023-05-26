@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { getUsers } from "../auth/LoginProvider"
-import { getUserProfileById } from "../auth/LoginProvider"
+import { getUserProfileById, getUsers } from "../community/UserProvider"
 
 
 export const UserNamesListed = ({ userToDisplay, UserNameClicked}) => {

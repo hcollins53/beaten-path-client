@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useContext, useEffect, useState } from "react"
-import { getUserProfile } from "../auth/LoginProvider"
+import { getUserProfile } from "../community/UserProvider"
+
 
 export const NavBar = ({setToken}) => {
     const navigate = useNavigate()

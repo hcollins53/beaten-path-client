@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { getUsers } from "../auth/LoginProvider"
 import { AddNewMessage } from "./MessageProvider"
+import { getUsers } from "../community/UserProvider"
 
 export const MessageForm = () => {
     const localUser = localStorage.getItem("hike_user")

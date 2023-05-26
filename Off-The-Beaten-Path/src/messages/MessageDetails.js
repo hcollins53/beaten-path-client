@@ -1,8 +1,8 @@
 import {  useNavigate, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { getUserProfileById } from "../auth/LoginProvider"
 import { useRef } from 'react';
 import { AddNewMessage } from "./MessageProvider";
+import { getUserProfileById } from "../community/UserProvider";
 
 
 export const MessageDetails = ({fullMessages, userId, updateMessages }) => {

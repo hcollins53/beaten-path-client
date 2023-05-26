@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { getUser } from "../auth/LoginProvider"
 import { AddNewCompletedToList } from "./TrailProvider"
 import { GetUserWishList } from "./TrailProvider"
 import { useNavigate, Link } from "react-router-dom"
 import { DeleteWish } from "./TrailProvider"
+import { getUser } from "../community/UserProvider"
 
 export const WishList = () => {
     const [wishList, setWishList] = useState([])

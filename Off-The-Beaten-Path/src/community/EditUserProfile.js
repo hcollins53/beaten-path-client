@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
-import { getUserProfile } from "../auth/LoginProvider"
+
 import {  useNavigate } from "react-router-dom"
 import { getTrails } from "../Trails/TrailProvider"
 import { EditUserProfile } from "./PostProvider"
+import { getUserProfile } from "./UserProvider"
 
 
 export const UserProfileEdit = () => {

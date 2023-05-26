@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { getUserProfileById } from "../auth/LoginProvider"
+
 import { DeletePost } from "./PostProvider"
 import { getReviewsByUserId } from "./PostProvider"
+import { getUserProfileById } from "./UserProvider"
 
 export const PostByUserClicked = () => {
     const[reviews, setReviews] = useState([])
