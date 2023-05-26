@@ -1,6 +1,10 @@
 const localUser = localStorage.getItem("hike_user")
+  if (localUser){
     const user = JSON.parse(localUser)
     const token = user["token"]
+    return token
+  }
+    
 
 export const loginUser = (user) => {
     return fetch("http://localhost:8000/login", {
