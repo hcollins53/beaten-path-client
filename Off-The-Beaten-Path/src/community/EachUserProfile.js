@@ -14,7 +14,7 @@ export const EachProfile = ({id, userProfile}) => {
                 <img className="rounded-full shadow-xl w-[200px] h-[200px]" src={userProfile.image} />
                 </Link>
             </div>
-            <div className="mb-2">Favorite hike: {userProfile.favoriteHike}</div>
+            <div className="mb-2">Favorite hike: {userProfile.favorite_hike}</div>
             <div className="mb-2 w-[300px]">How avid of a hiker are you: {userProfile.description}</div>
             <div className="text-center">{userProfile.area}</div>
             </div>
