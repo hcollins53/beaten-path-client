@@ -19,7 +19,7 @@ export const NavBar = ({setToken}) => {
                     const singleUser = userData[0]
                     updateUserProfile(singleUser)
                 })
-        }, [userId, userProfile]
+        }, [userId]
     )
     return (
         <div className="navbar bg-paleDogwood w-full bg-cover text-black relative shadow-lg font-title sticky top-0 z-50">
