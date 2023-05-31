@@ -1,6 +1,9 @@
 const localUser = localStorage.getItem("hike_user")
+    if (localUser) {
     const user = JSON.parse(localUser)
     const token = user["token"]
+    return token
+    }
 
 export const getUser = (hikeUser) => {
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/users/${hikeUser}`, {

@@ -1,9 +1,9 @@
 import { Navigate, useLocation } from "react-router-dom"
 
-export const Authorized = ({ token, children }) => {
+export const Authorized = ({ children }) => {
     const location = useLocation()
 
-    if (token) {
+     if (localStorage.getItem("hike_user")) {
         return children
     }
     else {
