@@ -3,7 +3,7 @@ const localUser = localStorage.getItem("hike_user")
     const token = user["token"]
 
 export const AddNewMessage = (newMessage) => {
-    return fetch("http://localhost:8000/messages", {
+    return fetch("https://beatenpath-app-pvyzi.ondigitalocean.app/messages", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -14,7 +14,7 @@ export const AddNewMessage = (newMessage) => {
             .then(res => res.json())
 }
 export const getUserSentMessages = (hikeUser) => {
-    return fetch(`http://localhost:8000/messages?sender=${hikeUser}`, {
+    return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/messages?sender=${hikeUser}`, {
         headers: {
           "Accept": "application/json",
           "Authorization": `Token ${token}`
@@ -22,7 +22,7 @@ export const getUserSentMessages = (hikeUser) => {
     .then(res => res.json())
 }
 export const getUserReceivedMessages = (hikeUser) => {
-    return fetch(`http://localhost:8000/messages?receiver=${hikeUser}`, {
+    return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/messages?receiver=${hikeUser}`, {
         headers: {
           "Accept": "application/json",
           "Authorization": `Token ${token}`

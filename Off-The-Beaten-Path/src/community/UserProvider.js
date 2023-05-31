@@ -3,7 +3,7 @@ const localUser = localStorage.getItem("hike_user")
     const token = user["token"]
 
 export const getUser = (hikeUser) => {
-    return fetch(`http://localhost:8000/users/${hikeUser}`, {
+    return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/users/${hikeUser}`, {
       headers: {
         "Accept": "application/json",
         "Authorization": `Token ${token}`
@@ -11,7 +11,7 @@ export const getUser = (hikeUser) => {
                 .then(res => res.json())
 }
 export const getUsers = () => {
-    return fetch(`http://localhost:8000/users`, {
+    return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/users`, {
       headers: {
         "Accept": "application/json",
         "Authorization": `Token ${token}`
@@ -19,7 +19,7 @@ export const getUsers = () => {
                 .then(res => res.json())
 }
 export const getUserProfile = (userId) => {
-    return fetch(`http://localhost:8000/userprofiles?user=${userId}`, {
+    return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/userprofiles?user=${userId}`, {
             headers: {
               "Accept": "application/json",
               "Authorization": `Token ${token}`
@@ -27,11 +27,11 @@ export const getUserProfile = (userId) => {
                 .then(res => res.json())
 }
 export const getUserById = (id) => {
-    return fetch(`http://localhost:8000/users/${id}`)
+    return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/users/${id}`)
                 .then(res => res.json())
 }
 export const getUserProfileById = (id) => {
-    return fetch(`http://localhost:8000/userprofiles?user=${id}`, {
+    return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/userprofiles?user=${id}`, {
       headers: {
         "Accept": "application/json",
         "Authorization": `Token ${token}`
