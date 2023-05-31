@@ -10,7 +10,7 @@ export const UserProfiles = () => {
             getUserProfiles().then(
                 (profileArray) => {
                     setUserProfiles(profileArray)
-                    if(profileArray.length > 3){
+                    if(profileArray.length > 4){
                         setScreeHight("full")
                     } else {
                         setScreeHight("screen")

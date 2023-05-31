@@ -27,7 +27,7 @@ export const CompletedList = () => {
             getUserCompletedList(hikeUser).then(
                 (completedArray) => {
                     setCompleted(completedArray)
-                    if(completedArray.length > 2){
+                    if(completedArray.length > 4){
                         setScreeHight("full")
                     } else {
                         setScreeHight("screen")

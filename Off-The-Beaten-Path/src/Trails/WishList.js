@@ -18,7 +18,7 @@ export const WishList = () => {
         GetUserWishList(hikeUser).then(
             (wishArray) => {
                 setWishList(wishArray)
-                if(wishArray.length > 3){
+                if(wishArray.length > 4){
                     setScreeHight("full")
                 } else {
                     setScreeHight("screen")

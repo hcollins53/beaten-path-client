@@ -154,9 +154,9 @@ export const TrailDetails = () => {
     }
         const AddToWishListButton = () => {
             const filteredWishList = wishList.filter(wish => {
-                return wish.trailId === parseInt(trailId)})
+                return wish?.trail?.id === parseInt(trailId)})
             const filteredCompletedList = completedList.filter(completed => {
-                return completed.trailId === parseInt(trailId)})
+                return completed.trail?.id === parseInt(trailId)})
           
             if (filteredWishList.length || filteredCompletedList.length) {
               return ""
