@@ -4,24 +4,31 @@ import { EachProfile } from "./EachUserProfile"
 
 export const UserProfiles = () => {
     const[userProfiles, setUserProfiles] = useState([])
-    
+    const [screenHeight, setScreeHight] = useState("")
     useEffect(
         () => {
             getUserProfiles().then(
                 (profileArray) => {
                     setUserProfiles(profileArray)
+                    if(wishArray.length > 3){
+                        setScreeHight("full")
+                    } else {
+                        setScreeHight("screen")
+                    }
                 }
             )
         },[]
         )
 
     return <>
-    <article className="flex flex-wrap flex-row justify-evenly h-auto">
-    {   
+    <article className={`h-${screenHeight}`}>
+    <article className="flex flex-wrap flex-row justify-evenly">
+    {    
         userProfiles.map(
             (userProfile) => <EachProfile id={userProfile.user?.id} userProfile={userProfile}/> )  
     }
 
+  </article>
   </article>
    </>
 }
