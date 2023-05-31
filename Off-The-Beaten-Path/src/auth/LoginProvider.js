@@ -16,6 +16,7 @@ export const loginUser = (user) => {
   export const registerUser = (user) => {
     return fetch("https://beatenpath-app-pvyzi.ondigitalocean.app/register", {
       method: "POST",
+      mode: 'no-cors',
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json"
