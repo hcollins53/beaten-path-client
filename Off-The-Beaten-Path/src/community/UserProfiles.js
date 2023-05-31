@@ -16,7 +16,7 @@ export const UserProfiles = () => {
         )
 
     return <>
-    <article className="flex flex-wrap flex-row justify-evenly">
+    <article className="flex flex-wrap flex-row justify-evenly h-auto">
     {   
         userProfiles.map(
             (userProfile) => <EachProfile id={userProfile.user?.id} userProfile={userProfile}/> )  
