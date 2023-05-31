@@ -1,9 +1,8 @@
 const localUser = localStorage.getItem("hike_user")
     const user = JSON.parse(localUser)
-    const hikeUser = user['userId']
-    const token = user["token"]
 
 export const getTrails = () => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/trails`, { 
         headers: {
         "Content-Type": "application/json",
@@ -13,6 +12,7 @@ export const getTrails = () => {
             .then(res => res.json())
 }
 export const AddNewTrail = (newTrail) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/trails`, {
          method: "POST",
          headers: {
@@ -24,6 +24,7 @@ export const AddNewTrail = (newTrail) => {
      })
  }
  export const getTrailById = (trailId) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/trails/${trailId}`, {
         headers: {
             "Accept": "application/json",
@@ -33,6 +34,7 @@ export const AddNewTrail = (newTrail) => {
             .then(res => res.json())
 }
 export const AddNewWishList = (newWish) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/wantlists`, {
          method: "POST",
          headers: {
@@ -44,6 +46,7 @@ export const AddNewWishList = (newWish) => {
  }
 
 export const GetUserWishList = (userId) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/wantlists?user=${userId}`, {
         headers: {
             "Accept": "application/json",
@@ -53,6 +56,7 @@ export const GetUserWishList = (userId) => {
             .then(res => res.json())
 }
 export const AddNewCompletedToList = (newCompleted) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/completedlists`, {
          method: "POST",
          headers: {
@@ -63,6 +67,7 @@ export const AddNewCompletedToList = (newCompleted) => {
      })
  }
  export const DeleteWish = wish => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/wantlists/${wish.id}`, {
         method: "DELETE",
         headers: {
@@ -71,6 +76,7 @@ export const AddNewCompletedToList = (newCompleted) => {
     })
 }
 export const getUserCompletedList = (userId) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/completedlists?user=${userId}`, {
         headers: {
             "Accept": "application/json",
@@ -104,6 +110,7 @@ export const getAirQuality = (trail) => {
     .then(response => response.json())
 }
 export const getCampsitesNearTrailId = ({trailId}) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/campingsites?trail=${trailId}`,{
         headers: {
             "Accept": "application/json",
@@ -114,6 +121,7 @@ export const getCampsitesNearTrailId = ({trailId}) => {
 }
 
 export const getTrailsByHttpString = (httpString) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/trails?${httpString}`, {
       headers: {
         "Authorization": `Token ${token}`

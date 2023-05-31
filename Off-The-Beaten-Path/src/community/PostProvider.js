@@ -1,8 +1,7 @@
 const localUser = localStorage.getItem("hike_user")
     const user = JSON.parse(localUser)
-    const hikeUser = user['userId']
-    const token = user["token"]
 export const getReviews = () => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/reviews`, {
         headers: {
             "Accept": "application/json",
@@ -12,6 +11,7 @@ export const getReviews = () => {
     .then(res => res.json())
 }
 export const AddNewReview = (newReview) => {
+    const token = user["token"]
     return fetch("https://beatenpath-app-pvyzi.ondigitalocean.app/reviews", {
             method: "POST",
             headers: {
@@ -23,6 +23,7 @@ export const AddNewReview = (newReview) => {
             .then(res => res.json())
 }
 export const getReviewsByUser = (hikeUser) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/reviews?user=${hikeUser}`, {
         headers: {
             "Accept": "application/json",
@@ -32,6 +33,7 @@ export const getReviewsByUser = (hikeUser) => {
     .then(res => res.json())
 }
 export const EditUserProfile = (userProfile) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/userprofiles/${userProfile.id}`, {
             method: "PUT",
             headers: {
@@ -43,6 +45,7 @@ export const EditUserProfile = (userProfile) => {
             response => response.json())
 }
 export const AddNewProfile = (newProfile) => {
+    const token = user["token"]
     return fetch("https://beatenpath-app-pvyzi.ondigitalocean.app/userprofiles", {
             method: "POST",
             headers: {
@@ -54,6 +57,7 @@ export const AddNewProfile = (newProfile) => {
             .then(res => res.json())
 }
 export const getUserProfiles = () => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/userprofiles`, {
         headers: {
             "Accept": "application/json",
@@ -63,6 +67,7 @@ export const getUserProfiles = () => {
     .then(res => res.json())
 }
 export const getReviewsByUserId = (id) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/reviews?user=${id}`, {
         headers: {
             "Accept": "application/json",
@@ -72,6 +77,7 @@ export const getReviewsByUserId = (id) => {
     .then(res => res.json())
 }
 export const DeletePost = review => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/reviews/${review.id}`, {
         method: "DELETE",
         headers: {
@@ -80,6 +86,7 @@ export const DeletePost = review => {
     })
 }
 export const EditUserPost = (review) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/reviews/${review.id}`, {
             method: "PUT",
             headers: {
@@ -90,6 +97,7 @@ export const EditUserPost = (review) => {
         })
 }
 export const getReview = (id) => {
+    const token = user["token"]
     return fetch(`https://beatenpath-app-pvyzi.ondigitalocean.app/reviews/${id}`, {
         headers: {
             "Accept": "application/json",
