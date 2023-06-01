@@ -1,3 +1,14 @@
+// Importing the dotenv package
+const dotenv = require('dotenv');
+
+// Load the .env file
+dotenv.config();
+
+// Access the air_key from the .env file
+const air_key = process.env.air_key;
+const weather_key = process.env.weather_key;
+
+
 const localUser = localStorage.getItem("hike_user")
     const user = JSON.parse(localUser)
 
@@ -86,7 +97,7 @@ export const getUserCompletedList = (userId) => {
             .then(res => res.json())
 }
 export const getWeather = (trail) => {
-    return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${trail.lat}&lon=${trail.lon}&appid=d00e2aa1ff1e89999b98b23f997071c4&units=imperial`)
+    return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${trail.lat}&lon=${trail.lon}&appid=${weather_key}&units=imperial`)
     .then(response => response.json())
     }
 
@@ -106,7 +117,7 @@ export const getSunriseOrSunsetTimes = (trail) => {
     .then(response => response.json())
 }
 export const getAirQuality = (trail) => {
-    return fetch(`http://api.airvisual.com/v2/nearest_city?lat=${trail.lat}&lon=${trail.lon}&key=ffe745a7-9425-4910-b912-1b8cb5d746d7`)
+    return fetch(`http://api.airvisual.com/v2/nearest_city?lat=${trail.lat}&lon=${trail.lon}&key=${air_key}`)
     .then(response => response.json())
 }
 export const getCampsitesNearTrailId = ({trailId}) => {
