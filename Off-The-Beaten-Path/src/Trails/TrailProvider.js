@@ -1,10 +1,4 @@
-// Importing the dotenv package
-const dotenv = require('dotenv');
 
-// Load the .env file
-dotenv.config();
-
-// Access the air_key from the .env file
 const air_key = process.env.air_key;
 const weather_key = process.env.weather_key;
 
