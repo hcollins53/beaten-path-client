@@ -111,7 +111,7 @@ export const getSunriseOrSunsetTimes = (trail) => {
     .then(response => response.json())
 }
 export const getAirQuality = (trail) => {
-    return fetch(`http://api.airvisual.com/v2/nearest_city?lat=${trail.lat}&lon=${trail.lon}&key=${air_key}`)
+    return fetch(`https://api.airvisual.com/v2/nearest_city?lat=${trail.lat}&lon=${trail.lon}&key=${air_key}`)
     .then(response => response.json())
 }
 export const getCampsitesNearTrailId = ({trailId}) => {
