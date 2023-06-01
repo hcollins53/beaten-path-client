@@ -1,6 +1,6 @@
 
-const air_key = process.env.air_key;
-const weather_key = process.env.weather_key;
+const air_key = process.env.REACT_APP_AIR_KEY;
+const weather_key = process.env.REACT_APP_WEATHER_KEY;
 
 
 const localUser = localStorage.getItem("hike_user")
